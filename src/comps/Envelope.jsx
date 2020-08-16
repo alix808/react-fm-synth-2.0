@@ -31,9 +31,18 @@ const Envelope = () => {
     } else return;
   };
 
+  const onMouseDown = () => {
+    if (audioCtx && masterGain) {
+      let now = audioCtx.currentTime;
+      masterGain.gain.cancelScheduledValues(now);
+      masterGain.gain.setValueAtTime(masterGain.gain.value, now);
+      masterGain.gain.linearRampToValueAtTime(1, now + attackTime);
+    } else return;
+  };
+
   return (
     <Fragment>
-      <button onClick={() => onClick()} />
+      <button onClick={() => onClick()} onMouseDown={() => onMouseDown()} />
       <input
         type={'range'}
         min={0.1}
