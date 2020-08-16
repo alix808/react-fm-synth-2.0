@@ -41,7 +41,7 @@ const SynthState = (props) => {
 
   const createModulator = (audioCtx) => {
     const modulator = audioCtx.createOscillator();
-    modulator.frequency.value = 44;
+    modulator.frequency.setValueAtTime(176, audioCtx.currentTime);
     dispatch({
       type: CREATE_MODULATOR,
       payload: modulator,

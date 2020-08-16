@@ -18,19 +18,12 @@ const Envelope = () => {
     setReleaseTime(x);
   };
 
-  const onMouseDown = () => {
+  const onClick = () => {
     if (audioCtx && masterGain) {
       let now = audioCtx.currentTime;
-      let currentGain = masterGain.gain.value;
       masterGain.gain.cancelScheduledValues(now);
-      masterGain.gain.setValueAtTime(currentGain, now);
+      masterGain.gain.setValueAtTime(masterGain.gain.value, now);
       masterGain.gain.linearRampToValueAtTime(1, now + attackTime);
-    } else return;
-  };
-
-  const onMouseUp = () => {
-    if (audioCtx && masterGain) {
-      let now = audioCtx.currentTime;
       masterGain.gain.linearRampToValueAtTime(
         0,
         now + attackTime + releaseTime
@@ -40,10 +33,10 @@ const Envelope = () => {
 
   return (
     <Fragment>
-      <button onMouseDown={() => onMouseDown()} onMouseUp={() => onMouseUp()} />
+      <button onClick={() => onClick()} />
       <input
         type={'range'}
-        min={0}
+        min={0.1}
         max={1}
         step={0.1}
         defaultValue={attackTime}
@@ -51,7 +44,7 @@ const Envelope = () => {
       />
       <input
         type={'range'}
-        min={0}
+        min={0.1}
         max={1}
         step={0.1}
         defaultValue={releaseTime}

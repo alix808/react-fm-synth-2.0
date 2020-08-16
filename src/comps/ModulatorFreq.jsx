@@ -5,7 +5,7 @@ const ModulatorFreq = () => {
   const synthContext = useContext(SynthContext);
   const { modulator, audioCtx } = synthContext;
 
-  const [freq, setFreq] = useState(40);
+  const [freq, setFreq] = useState(176);
 
   const onChange = (e) => {
     setFreq(e.target.value);
